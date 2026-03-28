@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estudio Contable IR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:    #0f2338;
+      --navy2:   #1a3350;
+      --lime:    #c8e04a;
+      --lime2:   #d4ec6a;
+      --white:   #ffffff;
+      --offwhite:#f4f6f0;
+      --gray:    #8a9ab0;
+      --text:    #e8edf5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--offwhite);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4rem;
+      height: 68px;
+      background: rgba(15,35,56,0.97);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .logo-circle {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--navy2);
+      border: 2px solid var(--lime);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      color: var(--white); letter-spacing: 0.04em;
+    }
+    .logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      color: var(--white); letter-spacing: 0.08em;
+      text-transform: uppercase; line-height: 1.1;
+    }
+    .logo-text span { color: var(--lime); display: block; font-weight: 400; font-size: 0.68rem; letter-spacing: 0.12em; }
+
+    .nav-links { display: flex; gap: 0.2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gray);
+      padding: 0.4rem 0.9rem;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--lime) !important;
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--lime2) !important; color: var(--navy) !important; }
+
+    /* HERO */
+    #inicio {
+      min-height: 100vh;
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 68px;
+      position: relative; overflow: hidden;
+    }
+    #inicio::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(200,224,74,0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+    #inicio::after {
+      content: 'IR';
+      position: absolute; right: -1rem; bottom: -5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28vw; font-weight: 800;
+      color: rgba(255,255,255,0.02);
+      line-height: 1; pointer-events: none; user-select: none;
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 3rem 5rem 5rem;
+      position: relative; z-index: 1;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(200,224,74,0.1);
+      border: 1px solid rgba(200,224,74,0.25);
+      border-radius: 3px;
+      padding: 0.35rem 0.9rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 1.8rem; width: fit-content;
+    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 800; line-height: 0.95;
+      color: var(--white); text-transform: uppercase;
+      letter-spacing: -0.01em; margin-bottom: 1.5rem;
+    }
+    .hero-title .accent { color: var(--lime); }
+    .hero-title .thin { font-weight: 400; }
+    .hero-sub {
+      font-size: 1rem; font-weight: 300;
+      color: var(--gray); line-height: 1.7;
+      max-width: 420px; margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn-lime {
+      background: var(--lime); color: var(--navy);
+      border: none; cursor: pointer;
+      padding: 0.85rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-lime:hover { background: var(--lime2); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.22);
+      cursor: pointer; padding: 0.85rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--lime); color: var(--lime); transform: translateY(-2px); }
+
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      padding: 5rem 4rem 5rem 2rem;
+      position: relative; z-index: 1;
+    }
+    .hero-card-wrap { display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 330px; }
+    .h-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 1.4rem 1.6rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .h-card:hover { border-color: rgba(200,224,74,0.3); transform: translateX(4px); }
+    .h-card-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.6rem; font-weight: 800;
+      color: var(--lime); line-height: 1; margin-bottom: 0.2rem;
+    }
+    .h-card-label { font-size: 0.78rem; color: var(--gray); letter-spacing: 0.04em; }
+    .h-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+    .h-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border-radius: 3px;
+      background: rgba(200,224,74,0.1);
+      color: var(--lime);
+      border: 1px solid rgba(200,224,74,0.22);
+    }
+
+    /* SERVICIOS */
+    #servicios { background: var(--offwhite); padding: 6rem 5rem; }
+    .sec-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #6a8012; margin-bottom: 0.6rem;
+    }
+    .sec-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 800; text-transform: uppercase;
+      line-height: 0.95; letter-spacing: -0.01em;
+      color: var(--navy); margin-bottom: 1rem;
+    }
+    .sec-title .accent { color: #6a8012; }
+    .sec-sub {
+      font-size: 0.95rem; font-weight: 300;
+      color: #5a6a7a; line-height: 1.7; max-width: 500px;
+    }
+    .servicios-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .servicios-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+    .srv-card {
+      background: var(--navy);
+      border-radius: 8px; padding: 2rem 1.5rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .srv-card:hover { transform: translateY(-5px); border-color: rgba(200,224,74,0.35); }
+    .srv-icon {
+      width: 40px; height: 40px; border-radius: 6px;
+      background: rgba(200,224,74,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      border: 1px solid rgba(200,224,74,0.2);
+    }
+    .srv-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--white);
+    }
+    .srv-card p { font-size: 0.8rem; color: var(--gray); line-height: 1.6; }
+    .srv-badge {
+      margin-top: auto;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lime);
+      border-top: 1px solid rgba(200,224,74,0.15);
+      padding-top: 0.8rem;
+    }
+
+    /* NOSOTROS */
+    #nosotros {
+      background: var(--navy);
+      padding: 6rem 5rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    #nosotros::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(200,224,74,0.05) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    #nosotros .sec-eyebrow { color: var(--lime); }
+    #nosotros .sec-title { color: var(--white); }
+    #nosotros .sec-title .accent { color: var(--lime); }
+    #nosotros .sec-sub { color: var(--gray); }
+
+    .valores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 2rem; }
+    .valor-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px; padding: 1rem 1.1rem;
+      border-left: 3px solid var(--lime);
+      transition: background 0.2s;
+    }
+    .valor-item:hover { background: rgba(200,224,74,0.06); }
+    .valor-item h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--white); margin-bottom: 0.3rem;
+    }
+    .valor-item p { font-size: 0.75rem; color: var(--gray); line-height: 1.5; }
+
+    .nos-visual { display: flex; flex-direction: column; gap: 0.8rem; position: relative; z-index: 1; }
+    .nos-logo-big {
+      width: 130px; height: 130px; border-radius: 50%;
+      background: var(--navy2); border: 3px solid var(--lime);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 3.2rem;
+      color: var(--white); letter-spacing: 0.04em;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 0 50px rgba(200,224,74,0.15);
+    }
+    .nos-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; }
+    .nos-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px; padding: 1.2rem 0.8rem; text-align: center;
+    }
+    .nos-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--lime); line-height: 1;
+    }
+    .nos-stat-label { font-size: 0.65rem; color: var(--gray); margin-top: 0.3rem; letter-spacing: 0.06em; }
+    .nos-location {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(200,224,74,0.08);
+      border: 1px solid rgba(200,224,74,0.2);
+      border-radius: 6px; padding: 0.8rem 1.1rem;
+      font-size: 0.82rem; color: var(--lime);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+
+    /* CONTACTO */
+    #contacto {
+      background: var(--offwhite); padding: 6rem 5rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .contact-methods { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px; text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .contact-item:hover { border-color: rgba(200,224,74,0.3); transform: translateX(4px); }
+    .contact-icon { font-size: 1.1rem; }
+    .contact-label {
+      font-size: 0.65rem; color: var(--gray);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: 'Barlow Condensed', sans-serif; display: block;
+    }
+    .contact-value { font-size: 0.88rem; color: var(--white); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #5a6a7a; font-weight: 600;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--white);
+      border: 1.5px solid #dde3ea; border-radius: 4px;
+      padding: 0.75rem 1rem; color: var(--navy);
+      font-family: 'Barlow', sans-serif; font-size: 0.88rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--navy); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .btn-submit {
+      background: var(--navy); color: var(--lime);
+      border: 2px solid var(--navy); padding: 0.9rem;
+      border-radius: 4px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+      margin-top: 0.3rem;
+    }
+    .btn-submit:hover { background: var(--navy2); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a {
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gray); transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--lime); }
+    .footer-copy { font-size: 0.72rem; color: var(--gray); }
+
+    .divider { height: 3px; background: linear-gradient(90deg, var(--lime) 0%, transparent 70%); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; animation: fadeUp 0.65s ease forwards; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.18s; }
+    .d3 { animation-delay: 0.30s; }
+    .d4 { animation-delay: 0.42s; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px) { .servicios-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (max-width: 780px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      #inicio { grid-template-columns: 1fr; }
+      .hero-left { padding: 4rem 1.5rem 3rem; }
+      .hero-right { display: none; }
+      #servicios, #nosotros, #contacto { padding: 4rem 1.5rem; }
+      .servicios-header { flex-direction: column; }
+      .servicios-grid { grid-template-columns: 1fr 1fr; }
+      #nosotros, #contacto { grid-template-columns: 1fr; gap: 2rem; }
+      .valores-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 480px) { .servicios-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#inicio">
+    <div class="logo-circle">IR</div>
+    <div class="logo-text">Estudio Contable <span>IR</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Quiénes somos</a></li>
+    <li><a href="#contacto" class="nav-cta">Contactanos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-left">
+    <div class="hero-tag fade-in d1">CABA &amp; Online</div>
+    <h1 class="hero-title fade-in d2">
+      Hacemos que<br>
+      <span class="accent">tus números</span><br>
+      <span class="thin">trabajen por</span><br>
+      tu negocio
+    </h1>
+    <p class="hero-sub fade-in d3">
+      Contabilidad para emprendedores y PyMEs. Asesoramiento claro, trato cercano y soluciones reales.
+    </p>
+    <div class="hero-btns fade-in d4">
+      <a href="#contacto" class="btn-lime">Contactanos</a>
+      <a href="#servicios" class="btn-ghost">Ver servicios</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-wrap fade-in d3">
+      <div class="h-card">
+        <div class="h-card-num">PyME</div>
+        <div class="h-card-label">Especialistas en emprendedores y pequeñas empresas de Argentina</div>
+      </div>
+      <div class="h-card">
+        <div class="h-card-label" style="margin-bottom:0.6rem;">Áreas de servicio</div>
+        <div class="h-card-tags">
+          <span class="h-tag">Contable</span>
+          <span class="h-tag">Impositivo</span>
+          <span class="h-tag">Laboral</span>
+          <span class="h-tag">Societario</span>
+          <span class="h-tag">Administrativo</span>
+        </div>
+      </div>
+      <div class="h-card">
+        <div class="h-card-num" style="font-size:1.3rem;letter-spacing:0.04em;line-height:1.3;">AFIP · ARBA · AGIP</div>
+        <div class="h-card-label">Gestión integral ante todos los organismos fiscales</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="servicios-header">
+    <div>
+      <p class="sec-eyebrow">Lo que hacemos</p>
+      <h2 class="sec-title">Nuestros<br><span class="accent">Servicios</span></h2>
+    </div>
+    <p class="sec-sub">Brindamos soporte y asesoramiento integral para que puedas enfocarte en hacer crecer tu negocio.</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="srv-card reveal">
+      <div class="srv-icon">📊</div>
+      <h3>Contable</h3>
+      <p>Registración contable, estados financieros, balances y cierres anuales.</p>
+      <div class="srv-badge">→ Balances &amp; Estados</div>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-icon">🧾</div>
+      <h3>Impositivo</h3>
+      <p>AFIP, ARBA, AGIP. Ganancias, IVA, Monotributo, Ingresos Brutos y declaraciones juradas.</p>
+      <div class="srv-badge">→ AFIP · ARBA · AGIP</div>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-icon">🗂️</div>
+      <h3>Administrativo</h3>
+      <p>Gestión de documentación, trámites y organización de la estructura empresarial.</p>
+      <div class="srv-badge">→ Trámites &amp; Gestión</div>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-icon">🏢</div>
+      <h3>Societario</h3>
+      <p>Constitución de SAS, SRL y SA. Modificaciones estatutarias y trámites IGJ.</p>
+      <div class="srv-badge">→ SAS · SRL · SA</div>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-icon">👥</div>
+      <h3>Laboral</h3>
+      <p>Liquidación de sueldos, cargas sociales, ART y cumplimiento de la normativa vigente.</p>
+      <div class="srv-badge">→ Sueldos &amp; RRHH</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div style="position:relative;z-index:1;">
+    <p class="sec-eyebrow">Sobre nosotros</p>
+    <h2 class="sec-title">Quiénes<br><span class="accent">Somos</span></h2>
+    <p class="sec-sub">Somos un equipo de contadores matriculados con base en CABA. Trabajamos de forma presencial y online para acompañar a emprendedores y PyMEs en cada etapa de su negocio.</p>
+    <div class="valores-grid">
+      <div class="valor-item reveal">
+        <h4>Confianza</h4>
+        <p>Relación transparente y a largo plazo con cada cliente.</p>
+      </div>
+      <div class="valor-item reveal">
+        <h4>Actualización</h4>
+        <p>Al día con cada cambio normativo para cuidar tus intereses.</p>
+      </div>
+      <div class="valor-item reveal">
+        <h4>Cercanía</h4>
+        <p>Trato personalizado. Nada de respuestas genéricas.</p>
+      </div>
+      <div class="valor-item reveal">
+        <h4>Agilidad</h4>
+        <p>Respuesta rápida y gestión eficiente de cada trámite.</p>
+      </div>
+    </div>
+  </div>
+  <div class="nos-visual reveal">
+    <div class="nos-logo-big">IR</div>
+    <div class="nos-stats">
+      <div class="nos-stat">
+        <div class="nos-stat-num">PyME</div>
+        <div class="nos-stat-label">Foco</div>
+      </div>
+      <div class="nos-stat">
+        <div class="nos-stat-num">100%</div>
+        <div class="nos-stat-label">Digital</div>
+      </div>
+      <div class="nos-stat">
+        <div class="nos-stat-num">CABA</div>
+        <div class="nos-stat-label">Sede</div>
+      </div>
+    </div>
+    <div class="nos-location">📍 CABA &nbsp;|&nbsp; 🌐 Online — todo el país</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div>
+    <p class="sec-eyebrow">¿Hablamos?</p>
+    <h2 class="sec-title">Contactanos</h2>
+    <p class="sec-sub">Respondemos consultas y te ayudamos a encontrar la mejor solución para tu situación fiscal y contable.</p>
+    <div class="contact-methods">
+      <a href="https://wa.me/5491100000000" class="contact-item reveal" target="_blank">
+        <span class="contact-icon">💬</span>
+        <div>
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value">Escribinos directamente</span>
+        </div>
+      </a>
+      <a href="mailto:info@estudiocontableir.com.ar" class="contact-item reveal">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">info@estudiocontableir.com.ar</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/estudiocontable.ir" class="contact-item reveal" target="_blank">
+        <span class="contact-icon">📸</span>
+        <div>
+          <span class="contact-label">Instagram</span>
+          <span class="contact-value">@estudiocontable.ir</span>
+        </div>
+      </a>
+      <a href="https://walink.co/cdfec4" class="contact-item reveal" target="_blank">
+        <span class="contact-icon">🔗</span>
+        <div>
+          <span class="contact-label">Todos los links</span>
+          <span class="contact-value">walink.co/cdfec4</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="tu@email.com" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Servicio de interés</label>
+      <select>
+        <option value="">Seleccioná un área…</option>
+        <option>Contable / Balances</option>
+        <option>Monotributo / Impositivo</option>
+        <option>Liquidación de Sueldos</option>
+        <option>Constitución de Sociedad</option>
+        <option>Certificaciones</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mensaje</label>
+      <textarea placeholder="Contanos tu situación…"></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Enviar consulta →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#inicio">
+    <div class="logo-circle" style="width:34px;height:34px;font-size:0.82rem;">IR</div>
+    <div class="logo-text" style="font-size:0.85rem;">Estudio Contable <span>IR</span></div>
+  </a>
+  <ul class="footer-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Quiénes somos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Estudio Contable IR · CABA</p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 75);
+      }
+    });
+  }, { threshold: 0.08 });
+  revealEls.forEach(el => io.observe(el));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.
